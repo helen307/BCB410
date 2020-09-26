@@ -1,0 +1,144 @@
+---
+title: "Course Journal - Entry 2"
+author: "Yining Ding (1003898446)"
+date: "24/09/2020"
+output:
+  pdf_document:
+    fig_caption: yes
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\pagenumbering{gobble} 
+\pagenumbering{arabic}
+# __Objective:__
+* The objective of the second assessment is to review the R coding style and be more familiar with R vectors and data frames. And note down any other thoughts on the R package that I am going to make in this course.
+
+# __Procedure:__
+1. Read and review the [R coding style](http://steipe.biochemistry.utoronto.ca/ abc/index.php/RPR-Coding_style). (Steipe, 2017)
+* Since I am familiar with R, I just recorded the coding styles that I did not notice before/ want to improve on.
+2. Answer the questions (vector index, accessing elements of R vectors, difference between `cat()` and `print()`)
+3. Locate `PlantGrowth`, `iris`, `DNase` dataset and performed some dataset filtration
+4. Brainstorm the ideas for the R package
+
+# __Results:__
+## 1. R coding style
+* Do not change global state: 
+  * `set.seed()` can change the state of Random Number Generator. If it is changed within a function, then it might result in vastly smaller space of random numbers.
+```{setseed}
+# This is the only acceptable usage of set.seed()
+set.seed(112358)
+# code
+set.seed(NULL) # reset RNG
+```
+
+* Do not use `save()` and `load()`
+  * These two functions saves **multiple** R objects and restores to the **same object** names. Therefore, one wouldn't know the actual object name.
+  * Use `writeRDS`/`readRDS` because they save a **single** R object
+  
+* Layout
+  * 80 char/line
+  * No more than 1 expression/line
+  
+* Design and granularity
+  * Do not repeat code: collocation.
+  * If functions have nested loops/conditions > 3 levels, try to break the function up.
+  
+* Headers, sections
+  * Can write purposes/author/data/version info in the headers for future reference.
+  * Use commented separators to structure the code
+```{headersection}
+# Purpose: to draw down the steps when going through BCB410 assessment #2.
+# Author: Yining Ding 
+# Version: 1
+# Update:
+# ------- SECTION 1 -------
+# ------- SECTION 2 -------
+```
+
+* Spaces
+  * Always separate operators/arguments/language keywords with spaces
+  * Never for function names.
+  * `if` and `for` are language keywords, therefore, need to leave spaces `for (...) {...`
+
+## 2. Answer the questions
+* Vector index in R starts from **1**
+* Can you mix positive and negative integers when accessing elements of an R vector?
+  * **No**, we can't.
+```{mix}
+new <- c(1, 2, 3, 4, 5) 
+new[1]                  # using a pos integer
+                        # [1] 1, only the first element returned
+new[-1]                 # using a neg integer
+                        # [1] 2 3 4 5, all the elements returned except the first
+new[c(1, -1)]           # using a mixture of pos and neg integers
+                        # Error in new[c(1, -1)] : only 0's may be mixed with negative subscripts
+```
+* What is the difference between `cat()` and `print()`?
+  * The difference between them is the **type of class** they return. In other words, `print()` returns the object being printed, while `cat()` outputs the object to the screen.
+```{catprint, fig.width=8, fig.height=4}
+class(cat("hello world"))   # NULL
+
+class(print("hello world")) # character
+```
+
+## 3. Locate `PlantGrowth` dataset in R
+(a) Results from an experiment to compare yields (as measured by dried weight of plants) obtained under a control and two different treatment conditions.
+  * `?PlantGrowth`
+(b) The dataset contains 30 rows and 2 cols
+  * `dim(PlantGrowth)`
+(c) There are 13 plants with a weight less than 5
+  * `sum(PlantGrowth$weight < 5)`
+(d) There is 1 plant with a weight less than 5 is in "trt2"
+  * `sum((PlantGrowth$weight < 5) & (PlantGrowth$group=="trt2"))`
+
+## 4. Locate the iris pre-loaded dataset
+(a) This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.
+  * `?iris `
+(b) The dataset contains 150 rows and 5 cols
+  * `dim(iris)`
+(c) There are 3 unique species, they are: setosa, versicolor, virginica
+  * `length(unique(iris$Species))`
+  * `unique(iris$Species)`
+  
+## 5. Locate the DNase preloaded dataset
+(a) The DNase data frame has 176 rows and 3 columns of data obtained during development of an ELISA assay for the recombinant protein DNase in rat serum.
+  * `?DNase`
+(b) #rows: 176, #cols: 3
+  * `dim(DNase)`
+(c) Write a function that can intake this dataset as an argument and return the mean concentration of all values from assay run 1. Provide the code snippet.
+(d) What is the mean concentration of all values from assay run 1? Use your function to calculate this.
+  * 3.106689
+```{dnase}
+mean_conc <- function(dnase) {
+  # Purpose: returns the mean concentration of all values from assay run 1.
+  # dnase: dataset that contains "Run", "conc" as its col names
+  # Run: integer
+  # conc: numeric
+  run_one <- dnase[dnase$Run == 1,]
+  mean_conc <- mean(run_one$conc)
+  return(mean_conc)
+}
+# Function call
+# mean_conc(DNase)
+```
+## 6. Package ideas
+After going through the former students' R packages, I think I should change the R package I want to make (in assessment 1). Because I find that there is huge amount of work just to create a small package, and I am not able to finish it. My new idea is to find a specific small problem to solve in the genome area. I do not know what exactly it is, but something that I can calculate and give answers for, and visualize the output ideally. But the prof said not to worry because we will have a chance to review many packages in the third assessment. So I may brainstorm till I have reviewed many more packages.
+
+# __Conclusions__
+* In this assessment, I learnt the coding styles of R that I need to pay more attention to.
+* The exercises refreshed R for me after filtering some datasets, and wrote a brief function.
+* I also read the R packages made by former students, and changed my idea. 
+
+# __Next steps__
+* Looking forward to going through assessment 3, and hopefully can have a better idea of what my package would be about.
+
+# __References__
+* Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) The New S Language. Wadsworth & Brooks/Cole. (has iris3 as iris.)
+* Davidian, M. and Giltinan, D. M. (1995) Nonlinear Models for Repeated Measurement Data, Chapman & Hall (section 5.2.4, p. 134)
+* Dobson, A. J. (1983) An Introduction to Statistical Modelling. London: Chapman and Hall.
+* Pinheiro, J. C. and Bates, D. M. (2000) Mixed-effects Models in S and S-PLUS, Springer.
+* Steipe, B. (2017, August 5). Coding_style. Retrieved September 24, 2020, from http://steipe.biochemistry.utoronto.ca/abc/index.php/RPR-Coding_style
