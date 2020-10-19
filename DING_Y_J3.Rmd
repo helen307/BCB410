@@ -1,0 +1,242 @@
+---
+title: "Journal Entry 3"
+author: "Yining Ding (1003898446)"
+date: "08/10/2020"
+output: pdf_document
+html_notebook:
+   theme: united
+   toc: yes
+   toc_depth: 3
+bibliography: DING_Y_J3.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\pagenumbering{gobble} 
+\pagenumbering{arabic}
+
+# __Objective:__
+The general objectives of this third assessment is to:
+
+1) Learn how to create a R package by exploring existing R packages;
+2) Learn how to find information, Vignettes, UserGuides, etc. for existing packages and use their corresponding functions;
+3) Learn how and where to download these packages (from: CRAN, Bioconductor, GitHub);
+4) And brainstorm package ideas (for my own package).
+
+We will go through four packages along with instructions and answer corresponding questions to achieve these goals. Note to myself: in-text and references were created via bib tex, ("DING_Y_J3.bib").
+
+# __Procedure:__
+
+## 1. Explore the package: `covid19.analytics` [@covid19]
+
+ * **1.0 Goal: This package is avaliable on both CRAN and github. In this section, we will download it from both sources to explore its functionalities and structures. We will also try the example from the help page to practice function usages in R packages.**
+ 
+ * **1.1** Browsed the CRAN [@cran] page (https://cran.r-project.org/web/packages/covid19.analytics/index.html) of this package: `covid19.analytics` [@covid19]. We explored its version, dependencies, reference manual, and explored the difference between `imports` and `suggusts`. I also discussed my opinion on why developpers tend to move their packages from GitHub to CRAN or Bioconductor. Answers may not be correct, will ask in discussion board if not discussed in class after submission.
+
+ * **1.2** We also took a look at the Reference manual: `covid19.analytics.pdf`. Reference manuals are usually very useful, they usually contain information like ‘Description’, ‘Usage’, ‘Arguments’ (for each function), ‘Values’ (return values of each function), and ‘Examples’. For practice purposes, we used the example from the help page for `totals.plt` and analyzed the output graph using ONTARIO as input.
+   
+ * **1.3** Downloaded the package from CRAN [@cran]
+```{r install_CRAN, eval=FALSE}
+# download this package
+install.packages("covid19.analytics")
+
+# see all functions in this packages
+ls("package:covid19.analytics")
+```
+
+ * **1.4** Removed the package and downloaded it from GitHub.
+```{r install, eval=FALSE}
+# Remove package installed from CRAN
+remove.packages("covid19.analytics")
+
+# Install package from GitHub
+library(devtools)
+devtools::install_github("mponce0/covid19.analytics", build_vignettes = TRUE)
+```
+
+ * **1.5** Visited the GitHub page: (https://github.com/mponce0/covid19.analytics), note that we can watch (="get notified") or star (="bookmarking") the repository.
+ 
+## 2. Explore the package: `edgeR` [@edgeR]
+
+ * **2.0 Goal: edgeR can be downloaded from Bioconductor which contains plenty bioinformatics packages. There are four main categories of packages: 1) software, 2) annotation, 3) experiment and 4) workflow packages. EdgeR can process RNA-seq data with biological replicates. We will explore how to retrieve information from Bioconductor [@bioconductor] pages.**
+ 
+ * **2.1** Explored the package type of edgeR [@edgeR]
+
+ * **2.2** Visited edgeR on bioconductor [@bioconductor]: (https://bioconductor.org/packages/3.11/bioc/html/edgeR.html), explored its version number, license, number of datasets, `NEWS` file and explored its changes since the previous version:  3.30.2. We also explored `edgeRUsersGuide.pdf`, and browsed the cases that this package has.
+
+## 3. Explore the package: MPLNClust [@MPLNClust]
+
+ * **3.0 Goal: Visit Github page for this package and learn how to retrieve package information from GitHub. We will also explore one of the functions in this package to practice R package usage. We will browse the Vignettes as well to get a general idea.**
+ 
+ * **3.1** The purpose of this package is to cluster count data; (The full name of the package: Mixtures of Poisson-Log Normal distributions for Clustering)
+
+ * **3.2** Visit GitHub page: (https://github.com/anjalisilva/MPLNClust). We explored description, installation instructions, overview, details, tutorial links, citation, references, etc.
+
+ * **3.3** We can find other packages that MPLNClust [@MPLNClust] depend on from the `DESCRIPTION` file in the `imports` section; we can find the required R version from `Depends`; we then explored the function of `bioViews`.
+   
+ * **3.4** Downloaded the package and explore the number of functions it contains. Explored the arguments and tried to run the example from the function `mplnVariational` and interpret the results.
+ 
+ * **3.5** Explored the vignettes of this package.
+
+## 4. My choice of package: ComplexHeatmap [@heatmap]
+
+ * **4.0 Goal: I chose to explore ComplexHeatmap, which is a bioconducutor package that produces graphs to help revealing patterns in datasets.**
+ 
+ * **4.1** Explored its functions, authors, dependencies, installation command, and the number of functions in the dataset.
+
+# __Results:__
+
+## 1. Package: `covid19.analytics` [@covid19]
+
+**1.b.i)** **2.0**
+
+**1.b.ii)** Other packages that this package depends on:
+```{}
+readxl, ape, rentrez, plotly, htmlwidgets, deSolve, gplots, pheatmap, 
+shiny, shinydashboard, shinycssloaders, DT, dplyr, collapsibleTree.
+```
+
+**1.b.iv)** According to the textbook, _R packages_ [@wickham2015r], packages under `imports` means that our package **must** depend on (= will not work without) these packages, whereas `suggusts` means that our package **may** depend on (= may work without) these packages, and they will not be installed automatically.
+
+**1.b.vi)** `totals.plt` **plots the total number of cases per day for different groups.**
+
+**1.b.xi)** Data retrieved on **2020-10-08 09:57:30**. **There was a dramatic increase of both confirmed cases, active cases and death cases starting from March. The three groups plateaued in May and seems to increase again at the end of September. The number of active cases dropped a little in May, and showed a slight increase since then.**
+```{r ontario, results='hide', message=FALSE, warning=FALSE}
+library("covid19.analytics")
+# retrieve time series data
+TS.data <- covid19.analytics::covid19.data("ts-ALL")
+# static and interactive plot 
+covid19.analytics::totals.plt(TS.data, geo.loc0 = "ONTARIO")
+```
+
+**1.b.xiii)**
+I am not very sure about my answer. I am wondering if it is because CRAN and Bioconductor have volunteers to help with managing the packages, and get them tested on a daily basis. Whereas on GitHub, the developers have to take everything in charge (more like a personal task). Another reason I can think of is that it is easier to download packages from CRAN and Bioconductor from the point of view of a user because the command is more fixed. If you want to download packages from GitHub, they may require many dependencies such as `conda` which can be user unfriendly for beginners.
+
+## 2. Package: edgeR [@edgeR]
+
+**2.b)** EdgeR is a **software** R package according to its bioconductor page.
+
+**2.d)** The version is **Release (3.11)**
+
+**2.e)** The license is **GPL (>=2)**
+
+**2.f)** 
+
+**2.g)** According to the textbook, _R packages_ [@wickham2015r], the `NEWS` file **describes all the changes developers have made since the previous version.**
+
+**2.h)** According to the `NEWS` file, one of the updates is: **readBismark2DGE() now forces 'files' to be character vector.**
+
+**2.i)** There are **8 case studies** in this package according to the table of content from `edgeRUsersGuide.pdf`.
+
+## 3. Package: MPLNClust [@MPLNClust]
+
+**3.b)** Other packages that MPLNClust [@MPLNClust] depends on: 
+```{}
+coda,capushe,cluster,clusterGeneration,edgeR,gplots,ggplot2,grDevices,MASS,mclust,
+mvtnorm,randomcoloR,RColorBrewer,reshape, rstan (>= 2.18.1),parallel,pheatmap,shiny
+```
+
+**3.c)** `Depends`: **to require a specific version of R**. For example, this package requires R version to be >= 3.4.0.(According to _R packages_ [@wickham2015r])
+
+**3.d)** `biocViews`: there are **“keywords” to describe a given package**. There are three types: Software, Annotation Data and Experiment Data. Usages include tagging their packages to "bookmark" them, or performing a broad search on all packages that meet the needs of the current demand.[@biocviews]
+
+**3.e)** `LazyData`: makes it easier to access data in your package. `LazyData = true` means that **memory won't be occupied until you use them**. (According to _R packages_ [@wickham2015r])
+
+**3.f)** `LinkingTo`: It adds `otherPackage/include` to the include path, which **allows dynamically “linking to” other code via the headers**. All packages under `LinkingTo` will be automatically included. [@wickham2015r]
+
+**3.h)** There are **10 functions** in the package.
+```{r howmanyfunctions, warning=FALSE, message=FALSE}
+library("MPLNClust")
+ls("package:MPLNClust")
+```
+
+**3.i)** There are **7 arguments** in mplnVariational: dataset, membership = "none", gmin, gmax, initMethod = "kmeans", nInitIterations = 2, normalize = "Yes".
+
+**3.j)** `proc.time` [@team2013r] determines how much real and CPU time (in seconds) the currently running R process has already taken.
+
+* `user time`: CPU time charged for the execution of user instructions of the calling process. 
+* `system time`: is the CPU time charged for execution by the system on behalf of the calling process. 
+
+**The output for clustering and model selection.**
+
+* `user = 3.651`: CPU time charged for the execution of user instructions of clustering and model selection.
+* `system = 0.067`: CPU time charged for execution by the system on behalf of clustering and model selection.
+* `elapsed = 3.723`: total elapsed time for the currently running R process.
+```{r example, warning=FALSE, message=FALSE}
+# Example from mplnVariational {MPLNClust}
+# Generating simulated data
+
+ trueMu1 <- c(6.5, 6, 6, 6, 6, 6)
+ trueMu2 <- c(2, 2.5, 2, 2, 2, 2)
+
+ trueSigma1 <- diag(6) * 2
+ trueSigma2 <- diag(6)
+
+ sampleData <- MPLNClust::mplnDataGenerator(nObservations = 1000,
+                                            dimensionality = 6,
+                                            mixingProportions = c(0.79, 0.21),
+                                            mu = rbind(trueMu1, trueMu2),
+                                            sigma = rbind(trueSigma1, trueSigma2),
+                                            produceImage = "No")
+
+# Clustering
+mplnResults <- MPLNClust::mplnVariational(dataset = sampleData$dataset,
+                                          membership = sampleData$trueMembership,
+                                          gmin = 1,
+                                          gmax = 2,
+                                          initMethod = "kmeans",
+                                          nInitIterations = 2,
+                                          normalize = "Yes")
+
+mplnResults$totalTime
+```
+
+**3.k)** **A vignette is a long user guide**. It describes the problem that your package is designed to solve, and then show the reader how to solve it. To browse vignette for `MPLNClust`: `browseVignettes("MPLNClust")`[@wickham2015r]
+
+**3.l)** There are two vignettes for this package: "A tour of MPLNClust with MCMC-EM" and "A tour of MPLNClust with variational-EM". [@MPLNClust]
+
+* In "A tour of MPLNClust with MCMC-EM", it gives a tour of MPLNClust (version 0.1.0) functionalities, and methods of parameter estimation via 1) an MCMC-EM framework. [@MPLNClust]
+* In "A tour of MPLNClust with variational-EM", it gives a tour of MPLNClust (version 0.1.0) functionalities, and methods of parameter estimation via 2) a variational Gaussian approximation with EM algorithm by Subedi and Browne, 2020. [@MPLNClust]
+
+## 4. Package: ComplexHeatmap [@heatmap]
+
+**4.a)** The name of the package is `ComplexHeatmap` [@heatmap], the URL: (https://www.bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)
+
+**4.b)** The purpose of the package is to **produce a heatmap from given datasets to reveal biological patterns**. The targeted audience of the package is looking for patterns of their datasets, possibly confirming up- and down- regulated genes.
+
+**4.c)** The author of the package is **Zuguang Gu**.
+
+**4.d)** Packages it relies on: 
+```{}
+circlize (>= 0.4.5), GetoptLong, colorspace, clue, RColorBrewer, 
+GlobalOptions (>= 0.1.0), parallel, png
+```
+
+**4.e)** To **install** this package, follow the command:
+```{r installheat, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("ComplexHeatmap")
+```
+
+**4.f)** **181 functions** are available in the package. How many datasets??????
+
+# __Conclusions__
+
+From this assessment, I got a general idea of functionality and structures of existing R packages. 
+
+* From the package `covid19.analytics` [@covid19], available on CRAN and GitHub, I learned that versions, imports, reference manuals can be found on the CRAN page. I also learned that `imports` means that the following packages must be installed for this package to work, while `suggusts` means that the following packages may benefit this package, and they will not be installed automatically. We then went through the reference manual, and we know that descriptions, usage, arguments, values, examples can be found in the reference manuals. I think that the reason why developers switch their packages to CRAN and Bioconductor is because it is easier for users to download and they have volunteers to help with daily testings. My answer may not be correct.
+
+* The second package, `edgeR` [@edgeR] can be downloaded from Bioconductor, which contains bioinformatics packages, we learned how to retrieve information from Bioconductor. We also learned that we can find changes to the package compared to the previous versions from the `NEWS` file. And I was able to find cases (detailed examples) from `UserGuide.pdf` on the Bioconductor page.
+
+* The next package was `MPLNClust` [@MPLNClust], we mainly explored how to retrieve package information from GitHub. I learned that in the `DESCRIPTION`, we can find the packages it depends on from `imports`, we can view the required R version from `Depends`, we can view the keyword description from `biocViews` (We can perform broad search on all packages and also tag the current package using biocViews). `LazyData` will not use our memory until we use them. `LinkingTo` allows us to dynamically link to other code via the headers. Vignette is a long user guide, and we can access it from command in R `browseVignettes("pckg")`. A R package can have multiple Vignettes.
+
+* I chose to explore `ComplexHeatmap` [@heatmap] as the last exercise It is available on bioconductor like `edgeR`, we can find basic informations such as `authors`, `imports`, `purpose`/targeting audiences, and `installation guides` from the Bioconductor page.
+
+# __Next Steps__
+The next step is to think about a bioinformatics related R package that I will be producing in the coming month. I will go through some of the packages from the previous BCB410 students and think of a simple biological questions that I can solve. I will follow the instructions from Journal Entry 4.
+
+# __References__
