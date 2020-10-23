@@ -1,0 +1,88 @@
+---
+title: "Journal Entry #4"
+author: "Yining Ding"
+date: "15/10/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\pagenumbering{gobble} 
+\pagenumbering{arabic}
+
+# __Objective:__
+
+The purpose of this journal is to draw down the goal of the R package I am going to develop in this course. Note that some minor details might change, but the general goal will remain the same. 
+
+# __Procedure__
+
+1. Wrote down the outline of the R package.
+2. Search my idea on Google. Thought about what kind of new features my package will provide compared to existing packages.
+3. Define the targeted audiences
+4. Assumptions of the package
+5. Think about the visualization my package will provide.
+6. Number of functions my package will provide to the users.
+7. Dependencies of my package
+8. Name of my package and why.
+9. Create a public GitHub repository and share the link
+
+# __Results__
+
+## 1. Provide an outline of the R package I would like to develop
+
+I would like to develop a R package that provides visualizations of phylogenetic trees with multiple sequence alignment on the side through the R Shiny APP.
+
+## 2. Are there similar packages that have already been developed? Do a search. What aspect of data analysis does your R package permit to perform, that has not been done to date?
+
+Yes, there are many similar packages that provides phylogenetic tree visualizations on shiny apps. But there is no package that includes the multiple sequence alignment. I believe a MSA visaulization on the side will give the users more information about the phylogenetic tree, such as on which are the conserved amino acids between the homologs etc.
+
+## 3. Who is the targeted audience of your package?
+
+The targeted audiences are those who wish to have a quick overview of their tree and the msa. The users will not be able to adjust and create a publication level phylogenetic tree with msa.
+
+## 4. What are some of the assumptions of your package?
+
+I would assume that users provide their msa file and also the tree txt file (in certain format, I haven't decided yet but I think I will include the phylip format for now).
+
+## 5. What type of a visual output might help perform the exploratory analysis of your package?
+
+I would use ggplot and ggtree to provide basic visualization of the phylogenetic tree, and the msa function in the package to create a basic multiple sequence alignment visualization. On the tree, users will be able to adjust/rotate clades by selecting a certain node which I believe helps with tree analysis the most. Coloring and front size adjustment will also be available for users to mark some of the important homologs/species for example. If I have time, I will include a notes section where users can take notes on their trees and use it as a notebook.
+
+## 6. Approximately how many functions would be available to user?
+
+Approximately 6 functions will be available to the users.
+* Create tree and msa
+* Clade rotation on selected nodes
+* Change color on one node
+* Change color on one clade
+* Change font size on one node
+* Change font size on one clade
+* etc. (if time permits)
+
+## 7. What other packages would your package depend on?
+
+My package will be depending on ape, ggtree, ggplot and phylip.
+
+## 8. What is the name of your package? Be sure to pick a meaningful name, with points discussed in Lecture 4. Describe the name you selected.
+
+* phyMSAViewer
+* "phy" describes the phylogenetic tree.
+* "Viewer" describes that the users will be able to view the phylogenetic tree along with its multiple sequence alignment
+
+## 9. Important: In your GitHub account, you must use your full name as provided in the course. This can be checked/changed by going to Settings → Public profile → Name. E.g., Kevin Smith should not use “Kev S" as the GitHub name. “Kevin Smith" must be used, if that is the name provided in the course.
+
+## 10. Create a GitHub repository with the package name. Share the link. Your project will be housed in this repository.
+phyMSAViewer. GitHub link: https://github.com/anjalisilva/ mixGaussian.
+
+
+# __Conclusions__
+
+# __Next Steps__
+
+# __References__
