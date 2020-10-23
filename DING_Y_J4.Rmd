@@ -31,6 +31,7 @@ The purpose of this journal is to draw down the goal of the R package I am going
 7. Dependencies of my package
 8. Name of my package and why.
 9. Create a public GitHub repository and share the link
+10. Share a brief overview of my package and the GitHub link on the discussion board.
 
 # __Results__
 
@@ -40,7 +41,8 @@ I would like to develop a R package that provides visualizations of phylogenetic
 
 ## 2. Are there similar packages that have already been developed? Do a search. What aspect of data analysis does your R package permit to perform, that has not been done to date?
 
-Yes, there are many similar packages that provides phylogenetic tree visualizations on shiny apps. But there is no package that includes the multiple sequence alignment. I believe a MSA visaulization on the side will give the users more information about the phylogenetic tree, such as on which are the conserved amino acids between the homologs etc.
+Yes, there are many similar packages that provides phylogenetic tree visualizations on shiny apps. For example, Interactively view and subset phylogenetic trees
+But there is no package that includes the multiple sequence alignment (Bradley, 2019). I believe a MSA visaulization on the side will give the users more information about the phylogenetic tree, such as on which are the conserved amino acids between the homologs etc.
 
 ## 3. Who is the targeted audience of your package?
 
@@ -67,7 +69,7 @@ Approximately 6 functions will be available to the users.
 
 ## 7. What other packages would your package depend on?
 
-My package will be depending on ape, ggtree, ggplot and phylip.
+My package will be depending on ape (Paradis and Schliep, 2019), ggtree (Guangchuang et al, 2017), and Rphylip (Felsenstein, 2013).
 
 ## 8. What is the name of your package? Be sure to pick a meaningful name, with points discussed in Lecture 4. Describe the name you selected.
 
@@ -75,14 +77,29 @@ My package will be depending on ape, ggtree, ggplot and phylip.
 * "phy" describes the phylogenetic tree.
 * "Viewer" describes that the users will be able to view the phylogenetic tree along with its multiple sequence alignment
 
-## 9. Important: In your GitHub account, you must use your full name as provided in the course. This can be checked/changed by going to Settings → Public profile → Name. E.g., Kevin Smith should not use “Kev S" as the GitHub name. “Kevin Smith" must be used, if that is the name provided in the course.
-
-## 10. Create a GitHub repository with the package name. Share the link. Your project will be housed in this repository.
-phyMSAViewer. GitHub link: https://github.com/anjalisilva/ mixGaussian.
+## 9. Create a GitHub repository with the package name. Share the link. Your project will be housed in this repository.
+phyMSAViewer. GitHub link: https://github.com/helen307/phyMSAViewer
 
 
 # __Conclusions__
 
+From this assessment, I developed a general idea about the type of R package I am going to create in the next month. I will create a R package with visualization through R shiny app to provide the users with phylogenetic tree visualization with multiple sequence alignment. The extra feature, MSA could inform the users which amino acid or how many amino acid are conserved between two homologs for example. Details have not developed yet, but this general idea will not change. I searched on Google about my idea and I found many similar visualization applications, but none of them included MSA on the side. I named my package: phyMSAViewer. The name is not complicated, it directly informs the user that they can visualize a phylogenetic tree and a msa at the same time. I updated my GitHub name and also created a new repository: https://github.com/helen307/phyMSAViewer. I shared this link on the discussion board.
+
 # __Next Steps__
 
+Timeline of package development: 
+
+* 1st week (10/24-10/25): I will review lecture 5 and lecture 6 to set up my package on the weekends. 
+* 2nd week (10/26-11/1): Then I plan to discover the dependency packages and try to come up with basic functions. On the shiny app, I could upload files and see the results of the tree and msa.
+* 3rd week (11/2-11/8): I will add functions to the visualization, such as colors, rotations, etc.
+* Initial submission: 11/11
+* 4th week (11/9-11/15): Prepare presentation (due 11/17)
+
 # __References__
+1. Bradley, T. (2019). Subsetting Phylogenetic Trees - goonR blog. Retrieved October 23, 2020, from https://tbradley1013.github.io/2018/06/19/subsetting-phylogenetic-trees/
+2. Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data. Methods in Ecology and Evolution 2017, 8(1):28-36
+3. Guangchuang Yu, Tommy Tsan-Yuk Lam, Huachen Zhu, Yi Guan. Two methods for mapping and visualizing associated data on phylogeny using ggtree. Molecular Biology and Evolution 2018, 35(2):3041-3043. doi: 10.1093/molbev/msy194
+4. Felsenstein, J. (2013) PHYLIP (Phylogeny Inference Package) version 3.695.
+Distributed by the author. Department of Genome Sciences, University of
+Washington, Seattle.
+5. Paradis E. & Schliep K. 2019. ape 5.0: an environment for modern phylogenetics and evolutionary analyses in R. Bioinformatics 35: 526-528.
